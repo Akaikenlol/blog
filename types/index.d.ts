@@ -8,3 +8,7 @@ export interface PostsProps {
 		id: string;
 	};
 }
+
+export interface RenterTagProps {
+	data: any;
+}
