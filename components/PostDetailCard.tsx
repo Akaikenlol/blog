@@ -1,11 +1,12 @@
 "use client";
 
 import { Eye, StepBack, ThumbsDown, ThumbsUp, User } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import { getEachData } from "@/lib/actions/data.actions";
 import { PostsProps } from "@/types";
 import { useRouter } from "next/navigation";
 import { Badge } from "./ui/badge";
+import RenderTag from "./RenderTag";
 
 const PostDetailCard = async ({ params }: PostsProps) => {
 	const router = useRouter();
@@ -26,24 +27,7 @@ const PostDetailCard = async ({ params }: PostsProps) => {
 								{data.title}
 							</h1>
 							<p className="max-w-[700px] mx-auto">{data.body}</p>
-							<div className="flex justify-between my-5 cursor-pointer">
-								<div className="flex items-center justify-center gap-3">
-									<Eye />
-									<p>{data.views}</p>
-								</div>
-								<div className="flex items-center justify-center gap-3">
-									<User />
-									<p>{data.userId}</p>
-								</div>
-								<div className="flex items-center justify-center gap-3">
-									<ThumbsUp />
-									<p>{data.reactions.likes}</p>
-								</div>
-								<div className="flex items-center justify-center gap-3">
-									<ThumbsDown />
-									<p>{data.reactions.dislikes}</p>
-								</div>
-							</div>
+							<RenderTag data={data} />
 							{data.tags.map((tag: string) => (
 								<Badge className="mt-2 text-zinc-400 border border-zinc-300 shadow-2xl px-3 py-1 mx-2 rounded-full cursor-pointer">
 									{tag}
