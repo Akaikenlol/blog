@@ -11,4 +11,5 @@ export interface PostsProps {
 
 export interface RenterTagProps {
 	data: any;
+	// onUpvote: () => void;
 }
