@@ -27,3 +27,5 @@ export const getEachData = async (id: any) => {
 		console.log(error);
 	}
 };
+
+export const createPost = async (data: any) => {};
