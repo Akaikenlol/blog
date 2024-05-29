@@ -17,6 +17,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "./ui/textarea";
 import { formSchema } from "@/lib/utils";
 import { z } from "zod";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import Link from "next/link";
 
 const CreateForm = () => {
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -27,7 +29,6 @@ const CreateForm = () => {
 		},
 	});
 
-	// 2. Define a submit handler.
 	function onSubmit(values: z.infer<typeof formSchema>) {
 		console.log(values);
 	}
@@ -84,6 +85,11 @@ const CreateForm = () => {
 					Submit
 				</Button>
 			</form>
+			<LogoutLink>
+				<Button className="flex gap-6 border-none bg-red-400 text-white hover:bg-red-300 ease-in-out duration-500 shadow-lg py-4 text-sm rounded-xl border">
+					<Link href={"/"}>Log Out</Link>
+				</Button>
+			</LogoutLink>
 		</Form>
 	);
 };

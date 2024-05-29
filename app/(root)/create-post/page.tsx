@@ -1,11 +1,8 @@
 import CreateForm from "@/components/CreateForm";
 import Header from "@/components/Header";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { createPost } from "@/lib/actions/data.actions";
 import React from "react";
 
-const CreatePosts = () => {
+const CreatePosts = async () => {
 	return (
 		<div>
 			<Header
