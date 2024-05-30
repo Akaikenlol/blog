@@ -7,11 +7,13 @@ import React from "react";
 import MobileNav from "@/components/MobileNav";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { Button } from "./ui/button";
 
 const Navbar = () => {
 	const pathname = usePathname();
 	return (
-		<header className="flex justify-between items-center py-4 px-7 border-b">
+		<header className="flex justify-between items-center py-4 px-7 border-b w-full">
 			<Link href={"/"}>
 				<Image
 					src={"/assets/logo.png"}
@@ -22,19 +24,12 @@ const Navbar = () => {
 					className="invert w-[45px] h-[45px]"
 				/>
 			</Link>
-			<nav>
-				<ul className="lg:flex justify-between gap-x-6 text-sm hidden">
+			<nav className="flex text-center justify-center items-center">
+				<ul className="lg:flex justify-between text-center items-center w-full gap-5 text-sm hidden">
 					{navBarLinks.map((link) => {
 						const isActive = pathname === link.route;
 						return (
 							<li key={link.label}>
-								{/* <Link
-										href={link.route}
-										key={link.label}
-										className="text-zinc-400 hover:text-zinc-900 ease-in-out duration-300"
-									>
-										{link.label}
-									</Link> */}
 								<Link
 									href={link.route}
 									key={link.label}
@@ -58,7 +53,20 @@ const Navbar = () => {
 						);
 					})}
 				</ul>
-				<MobileNav />
+				<div className="flex w-32 justify-end">
+					<SignedIn>
+						<UserButton />
+						<MobileNav />
+					</SignedIn>
+					<SignedOut>
+						<Button
+							asChild
+							className="border-slate-500 border py-1 px-5 rounded-xl hover:bg-zinc-100 ease-in-out duration-300"
+						>
+							<Link href={"/sign-in"}>Login</Link>
+						</Button>
+					</SignedOut>
+				</div>
 			</nav>
 		</header>
 	);

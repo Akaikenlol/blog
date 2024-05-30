@@ -85,11 +85,6 @@ const CreateForm = () => {
 					Submit
 				</Button>
 			</form>
-			<LogoutLink>
-				<Button className="flex gap-6 border-none bg-red-400 text-white hover:bg-red-300 ease-in-out duration-500 shadow-lg py-4 text-sm rounded-xl border">
-					<Link href={"/"}>Log Out</Link>
-				</Button>
-			</LogoutLink>
 		</Form>
 	);
 };

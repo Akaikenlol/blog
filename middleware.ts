@@ -1,15 +1,11 @@
-import {
-	authMiddleware,
-	withAuth,
-} from "@kinde-oss/kinde-auth-nextjs/middleware";
-import { NextRequest } from "next/server";
-import { effect } from "zod";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-export default function middleware(req: NextRequest) {
-	return withAuth(req);
-}
+const protectedRoutes = createRouteMatcher(["/create-post", "/posts"]);
+
+export default clerkMiddleware((auth, req) => {
+	if (protectedRoutes(req)) auth().protect();
+});
 
 export const config = {
-	// matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
-	matcher: ["/create-post"],
+	matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
 };

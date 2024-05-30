@@ -71,17 +71,6 @@ const MobileNav = () => {
 										</SheetClose>
 									);
 								})}
-
-								{/* {navBarLinks.map((link) => (
-									<li key={link.label}>
-										<Link
-											href={link.route}
-											className="text-zinc-400 hover:text-zinc-900 ease-in-out duration-300"
-										>
-											{link.label}
-										</Link>
-									</li>
-								))} */}
 							</nav>
 						</SheetClose>
 					</div>
