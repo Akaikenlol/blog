@@ -10,7 +10,7 @@ export const formSchema = z.object({
 	title: z
 		.string()
 		.min(2, { message: "Title must be at least 2 character" })
-		.max(50),
+		.max(500),
 	body: z
 		.string()
 		.min(2, { message: "Title must be at least 2 character" })

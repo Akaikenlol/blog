@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import {
 	Form,
 	FormControl,
-	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
@@ -17,8 +16,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "./ui/textarea";
 import { formSchema } from "@/lib/utils";
 import { z } from "zod";
-import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
-import Link from "next/link";
 
 const CreateForm = () => {
 	const form = useForm<z.infer<typeof formSchema>>({
