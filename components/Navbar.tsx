@@ -13,7 +13,7 @@ import { Button } from "./ui/button";
 const Navbar = () => {
 	const pathname = usePathname();
 	return (
-		<header className="flex justify-between items-center py-4 px-7 border-b w-full">
+		<header className="flex justify-between items-center py-2 px-7 border-b w-full">
 			<Link href={"/"}>
 				<Image
 					src={"/assets/logo.png"}
@@ -54,10 +54,12 @@ const Navbar = () => {
 					})}
 				</ul>
 				<div className="flex w-32 justify-end">
-					<SignedIn>
-						<UserButton />
-						<MobileNav />
-					</SignedIn>
+					<div className="flex gap-5 justify-center items-center">
+						<SignedIn>
+							<UserButton />
+							<MobileNav />
+						</SignedIn>
+					</div>
 					<SignedOut>
 						<Button
 							asChild
