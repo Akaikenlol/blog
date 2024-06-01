@@ -13,3 +13,8 @@ export const navBarLinks = [
 		label: "Create Post",
 	},
 ];
+
+export interface createPostProps {
+	title: string;
+	body: string;
+}

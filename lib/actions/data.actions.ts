@@ -1,3 +1,10 @@
+"use server";
+
+import prisma from "../db";
+import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
+import { createPostProps } from "@/constants";
+
 export const getData = async () => {
 	try {
 		const response = await fetch("https://dummyjson.com/posts?limit=10", {
@@ -28,4 +35,29 @@ export const getEachData = async (id: any) => {
 	}
 };
 
-export const createPost = async (data: any) => {};
+export const createPost = async ({ title, body }: createPostProps) => {
+	const newPost = await prisma.post.create({
+		data: {
+			title,
+			body,
+		},
+	});
+
+	revalidatePath("/posts");
+
+	return newPost;
+};
+
+export const getPostData = async (id: any) => {
+	const post = await prisma.post.findUnique({
+		where: {
+			id: id.toString(),
+		},
+	});
+
+	if (!post) {
+		redirect("/404");
+	}
+
+	return post;
+};
