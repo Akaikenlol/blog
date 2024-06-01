@@ -3,13 +3,14 @@ import { getData } from "@/lib/actions/data.actions";
 import Link from "next/link";
 import Image from "next/image";
 import { StepBack } from "lucide-react";
+import prisma from "@/lib/db";
 
 const PostCard = async () => {
-	const response = await getData();
+	const posts = await prisma.post.findMany();
 	return (
 		<div className="flex flex-col">
 			<ul className="text-center px-5 pt-6">
-				{response?.map((post: any) => (
+				{posts?.map((post: any) => (
 					<li key={post.id} className="mb-12">
 						<Link href={`posts/${post.id}`} className="lg:text-2xl sm:text-lg">
 							<div className="mx-auto max-w-2xl px-6 lg:px-3">

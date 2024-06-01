@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "./ui/textarea";
 import { formSchema } from "@/lib/utils";
 import { z } from "zod";
+import { createPost } from "@/lib/actions/data.actions";
 
 const CreateForm = () => {
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -26,9 +27,21 @@ const CreateForm = () => {
 		},
 	});
 
-	function onSubmit(values: z.infer<typeof formSchema>) {
-		console.log(values);
+	async function onSubmit(values: z.infer<typeof formSchema>) {
+		const { title, body } = values;
+
+		try {
+			const newPost = await createPost({ title, body });
+
+			if (newPost) {
+				form.reset();
+				console.log("Post created successfully");
+			}
+		} catch (error) {
+			console.error("Failed to create post", error);
+		}
 	}
+
 	return (
 		<Form {...form}>
 			<form
