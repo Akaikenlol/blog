@@ -61,3 +61,19 @@ export const getPostData = async (id: any) => {
 
 	return post;
 };
+
+export const getServerSideProps = async (context: any) => {
+	const params = await getPostData(context.params.id);
+
+	if (!params) {
+		return {
+			notFound: true,
+		};
+	}
+
+	return {
+		props: {
+			params,
+		},
+	};
+};

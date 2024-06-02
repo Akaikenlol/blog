@@ -7,6 +7,7 @@ export interface PostsProps {
 	params: {
 		id: string;
 	};
+	postData: any;
 }
 
 export interface RenterTagProps {

@@ -17,8 +17,10 @@ import { Textarea } from "./ui/textarea";
 import { formSchema } from "@/lib/utils";
 import { z } from "zod";
 import { createPost } from "@/lib/actions/data.actions";
+import { useRouter } from "next/navigation";
 
 const CreateForm = () => {
+	const router = useRouter();
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -40,6 +42,8 @@ const CreateForm = () => {
 		} catch (error) {
 			console.error("Failed to create post", error);
 		}
+
+		return router.push("/posts");
 	}
 
 	return (
