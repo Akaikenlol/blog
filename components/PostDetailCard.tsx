@@ -1,33 +1,22 @@
 "use client";
 
 import { Eye, StepBack, User } from "lucide-react";
-import { getEachData, getPostData } from "@/lib/actions/data.actions";
+import { getPostData } from "@/lib/actions/data.actions";
 import { PostsProps } from "@/types";
-import { notFound, useRouter } from "next/navigation";
-import { Badge } from "./ui/badge";
+import { useRouter } from "next/navigation";
 import RenderTag from "./RenderTag";
-import prisma from "@/lib/db";
-import { useEffect, useState } from "react";
+import Loading from "@/app/(root)/posts/loading";
 
-const PostDetailCard = async ({ params }: PostsProps) => {
+const PostDetailCard = async ({ postData }: PostsProps) => {
 	const router = useRouter();
-	// const { id } = params;
-	// const postData = await getPostData(id);
-	// const postData = await prisma.post.findUnique({
-	// 	where: {
-	// 		id: parseInt(params.id.toString()),
-	// 	},
-	// });
-
-	const postData = await getPostData(params.id);
-
-	if (!postData) {
-		notFound();
-	}
 
 	const handleClick = () => {
 		return router.push(`/posts/`);
 	};
+
+	if (!postData) {
+		return <Loading />;
+	}
 
 	return (
 		<div className="flex flex-col gap-6 items-center">
@@ -67,3 +56,20 @@ const PostDetailCard = async ({ params }: PostsProps) => {
 };
 
 export default PostDetailCard;
+
+export const getServerSideProps = async (context: any) => {
+	const { id } = context.params;
+	const postData = await getPostData(id);
+
+	if (!postData) {
+		return {
+			notFound: true,
+		};
+	}
+
+	return {
+		props: {
+			postData,
+		},
+	};
+};
